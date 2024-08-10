@@ -1,0 +1,25 @@
+# Ignore Dockerfile
+Dockerfile
+
+# Ignore Python bytecode files
+*.pyc
+*.pyo
+*.pyd
+__pycache__
+
+# Ignore virtual environments
+venv/
+env/
+
+# Ignore version control directories
+.git/
+.gitignore
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+*.swp
+
+# Ignore other unnecessary files
+*.md
+README.md
