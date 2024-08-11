@@ -5,3 +5,4 @@ gradio
 langchain-google-genai
 langchain-openai
 python-dotenv
+langdetect
