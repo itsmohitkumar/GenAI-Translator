@@ -5,7 +5,7 @@ with open('README.md', 'r', encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name='genai_translator_app',
+    name='genai-translator-app',
     version='0.1',
     author='Mohit Kumar',
     author_email='mohitpanghal12345@gmail.com',
