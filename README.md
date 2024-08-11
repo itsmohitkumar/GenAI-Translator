@@ -81,6 +81,33 @@ The configuration is managed in the `config.py` file. The default values can be 
 
     Open the link provided in the terminal output to access the translation interface.
 
+3. **Using the TranslatorApp Package:**
+
+    You can use the `translator-app` package for programmatic access to the translation functionality. First, install the package:
+
+    ```bash
+    pip install translator-app==0.1
+    ```
+
+    Then, use the following code snippet to perform translations:
+
+    ```python
+    from translator_app.config import Config
+    from translator_app.translator import TranslatorApp
+
+    # Initialize configuration
+    config = Config()
+
+    # Create a TranslatorApp instance with the configuration
+    translator = TranslatorApp(config)
+
+    # Perform a translation
+    result = translator.perform_translations("Groq", "German", "Hello World")
+
+    # Print the result
+    print(result)
+    ```
+
 ## File Structure
 
 ```
