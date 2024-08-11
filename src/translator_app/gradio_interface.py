@@ -71,4 +71,4 @@ class GradioInterface:
         """
         Launch the Gradio interface.
         """
-        self.interface.launch(share=True)
+        self.interface.launch(server_name="0.0.0.0", server_port=7860, share=True)

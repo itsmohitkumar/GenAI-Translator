@@ -1,17 +1,14 @@
-# Use a base Python image
+# Use an official Python runtime as a parent image
 FROM python:3.10-slim
 
-# Set environment variables
-ENV LANGCHAIN_TRACING_V2=true
-ENV LANGCHAIN_PROJECT=translator_app
-ENV LANGCHAIN_API_KEY=your_langchain_api_key
-
-# Set working directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Install necessary packages and clean up
+# Install dependencies
 RUN apt-get update && \
-    apt-get install -y git && \
+    apt-get install -y \
+    curl \
+    procps && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy the requirements file and install Python dependencies
@@ -21,8 +18,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the application code
 COPY . .
 
-# Expose the port that the app will run on
+# Expose the port that Gradio will use
 EXPOSE 7860
 
-# Set the default command to run the application
+# Define the command to run the application
 CMD ["python", "app.py"]
