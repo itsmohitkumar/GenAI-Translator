@@ -45,6 +45,7 @@ class TranslatorApp:
             "max_retries": 2,
         }
 
+        # Adjust the parameter name based on the chatbot class
         if chatbot_class == ChatGoogleGenerativeAI:
             init_params["model"] = model_name
         else:
@@ -100,44 +101,29 @@ class GradioInterface:
         def translate_text(model_name, input_text, input_language, output_language):
             return self.translator.perform_translations(model_name, input_language, output_language, input_text)
 
-        with gr.Blocks(css=".gradio-container { max-width: 800px; margin: auto; }") as demo:
-            gr.Markdown("# 📝 Multilingual Translator")
-            gr.Markdown("Translate text between different languages using your chosen chatbot model.")
-            
-            with gr.Row():
-                with gr.Column(scale=1):
-                    model_choice = gr.Dropdown(
-                        choices=["Groq", "Google", "OpenAI"],
-                        label="Choose Translation Model",
-                        value="Groq"
-                    )
-                    input_text = gr.Textbox(label="Input Text", lines=5, placeholder="Enter text here...")
-                    input_language = gr.Dropdown(
-                        choices=["English", "German", "French", "Spanish", "Chinese", "Japanese"],
-                        label="Input Language",
-                        value="English"
-                    )
-                    output_language = gr.Dropdown(
-                        choices=["English", "German", "French", "Spanish", "Chinese", "Japanese"],
-                        label="Output Language",
-                        value="German"
-                    )
-                    translate_button = gr.Button("Translate")
-
-                with gr.Column(scale=1):
-                    output_text = gr.Textbox(label="Translation", lines=5, placeholder="Translation will appear here...")
-                    copy_button = gr.Button("Copy Translation")
-                    clear_button = gr.Button("Clear")
-
-            translate_button.click(translate_text, inputs=[model_choice, input_text, input_language, output_language], outputs=output_text)
-            clear_button.click(lambda: None, None, output_text)
-            copy_button.click(lambda x: gr.utils.copy_to_clipboard(x), inputs=output_text, outputs=None)
-        
-        self.interface = demo
+        self.interface = gr.Interface(
+            fn=translate_text,
+            inputs=[
+                gr.Dropdown(
+                    choices=["Groq", "Google", "OpenAI"],
+                    label="Choose Translation Model",
+                    value="Groq"
+                ),
+                gr.Textbox(label="Input Text"),
+                gr.Textbox(label="Input Language", value="English"),
+                gr.Textbox(label="Output Language", value="German"),
+            ],
+            outputs=[
+                gr.Textbox(label="Translation"),
+            ],
+            title="Multilingual Translator",
+            description="Translate text between different languages using your chosen chatbot model."
+        )
 
     def launch(self):
-        self.interface.launch(share=True)
+        self.interface.launch(share=True)  # Set share=True to create a public link
 
+# Main execution
 if __name__ == "__main__":
     try:
         groq_api_key = os.getenv("GROQ_API_KEY")
