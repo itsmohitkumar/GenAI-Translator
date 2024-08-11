@@ -1,27 +1,27 @@
 from setuptools import find_packages, setup
 
-with open('README.md', 'r') as f:
+# Read the contents of your README file
+with open('README.md', 'r', encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
     name='bharat-chatbot-groq',
-    version='0.0.1',
+    version='0.1',
     author='Mohit Kumar',
     author_email='mohitpanghal12345@gmail.com',
-    description='An AI-powered chatbot using multiple open source models using groq',
+    description='An AI-powered chatbot that leverages multiple open-source models, including Groq, for advanced language processing and translation.',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/itsmohitkumar/bharat-chatbot-groq',
+    url='https://github.com/itsmohitkumar/GenAI-Translator',
     install_requires=[
-        'langchain',
-        'python-dotenv',
-        'langchain-core',
-        'langchain-community',
-        'langchain-groq',
-        'sentence-transformers',
-        'sentence_transformers'
+        'langchain_groq',
+        'langchain_google_genai',
+        'langchain_openai',
+        'gradio',
+        'langdetect',
+        'python-dotenv'
     ],
-    packages=find_packages(),
+    packages=find_packages(include=['translator_app', 'src']),
     include_package_data=True,
     classifiers=[
         'Programming Language :: Python :: 3',
@@ -33,4 +33,9 @@ setup(
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
     ],
     python_requires='>=3.9',
+    entry_points={
+        'console_scripts': [
+            'translator_app=app:main',
+        ],
+    },
 )

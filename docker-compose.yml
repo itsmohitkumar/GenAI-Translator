@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  translator_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: translator_app
+    ports:
+      - "7860:7860"  # Expose port 7860 on the host and container
+    env_file:
+      - .env  # Load environment variables from the .env file
+    volumes:
+      - .:/app  # Mount the current directory to /app in the container
+    restart: unless-stopped
