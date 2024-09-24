@@ -2,6 +2,8 @@
 
 **GenAI Translator** is a state-of-the-art multilingual translation application designed to leverage advanced language models for high-quality translations. This project uses powerful AI models from Groq, Google, and OpenAI to deliver precise and contextually accurate translations.
 
+![YouTube Echo Demo](image/translater-demo.png)
+
 ## Features
 
 - **Multi-Model Support**: Integrates with Groq, Google, and OpenAI language models.
